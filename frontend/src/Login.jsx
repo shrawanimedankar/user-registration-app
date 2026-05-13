@@ -3,51 +3,34 @@ import axios from "axios";
 import "./Signup.css";
 import { Link } from "react-router-dom";
 
-
-function Signup() {
+function Login() {
   const [formData, setFormData] = useState({
-    name: "",
     email: "",
     password: "",
   });
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    setFormData({ ...formData, [e.target.name]: e.target.value, });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const res = await axios.post(
-        "http://localhost:5000/signup",
-        formData
-      );
-
+      const res = await axios.post( "http://localhost:5000/login", formData );
       alert(res.data.message);
     } catch (err) {
       console.log(err);
-      alert("Error");
+      alert("Invalid Email or Password");
     }
   };
 
   return (
     <div className="container">
       <div className="signup-box">
-        <h2>Create Account</h2>
+        <h2>Login</h2>
 
         <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            name="name"
-            placeholder="Enter Name"
-            onChange={handleChange}
-            required
-          />
-
           <input
             type="email"
             name="email"
@@ -64,17 +47,16 @@ function Signup() {
             required
           />
 
-          <button type="submit">Signup</button>
+          <button type="submit">Login</button>
         </form>
 
         <p>
-          Already have an account?
-          <Link to="/login"> Login</Link>
+          Don't have an account?
+          <Link to="/"> Signup</Link>
         </p>
-
       </div>
     </div>
   );
 }
 
-export default Signup;
+export default Login;

@@ -1,7 +1,7 @@
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
 
-module.exports.signup = async (req, res) => {
+const signup = async (req, res) => {
   try {
     const { name, email, password } = req.body;
 
@@ -21,9 +21,10 @@ module.exports.signup = async (req, res) => {
 
   } catch (err) {
     console.log(err);
-
     res.status(500).json({
       message: "Server Error",
     });
   }
 };
+
+module.exports = signup;
